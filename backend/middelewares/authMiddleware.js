@@ -33,6 +33,7 @@ module.exports = (req, res, next) => {
         } else {
             // the 'sub' field of the token should contain the Cognito User ID
             req.user = { id: decoded.sub };
+            console.log(req.user)
             next();
         }
     });

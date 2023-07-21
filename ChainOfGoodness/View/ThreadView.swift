@@ -16,17 +16,7 @@ struct ThreadView: View {
     @State var isDraggable = true
     @EnvironmentObject var model : Model
     
-    let colorPalette: [Color] = [
-        Color(hex: "#c5aae7"),
-        Color(hex: "#7896f0"),
-        Color(hex: "#94a6f2"),
-        Color(hex: "#dc94db"),
-        Color(hex: "#a8aff0"),
-        Color(hex: "#dd9ee0"),
-        Color(hex: "#7db4f4"),
-        Color(hex: "#ccc4e9"),
-        Color(hex: "#c4a5d2"),
-    ]
+   
 
     var body: some View {
         ZStack {
@@ -79,11 +69,10 @@ struct ThreadView: View {
             )
             .background(
                 Rectangle()
-                    .fill(colorPalette.randomElement() ?? Color.white)
-                    .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
-                    .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
-                    .offset(y: scrollY > 0 ? -scrollY : 0 )
-                    .blur(radius:scrollY/10)
+                    .fill(Color(hex:thread.Colour))
+            .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
+            .offset(y: scrollY > 0 ? -scrollY : 0 )
+            .blur(radius:scrollY/10)
                 )
             .mask(
                 RoundedRectangle(cornerRadius:  appear[0] ? 0 : 30, style: .continuous)
@@ -249,6 +238,6 @@ struct ThreadView_Previews: PreviewProvider {
     @Namespace static var namespace
 
     static var previews: some View {
-        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: []), show: .constant(true))
+        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF"), show: .constant(true))
     }
 }

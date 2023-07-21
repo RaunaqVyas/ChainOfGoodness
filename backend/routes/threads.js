@@ -3,15 +3,31 @@ const router = express.Router();
 const Thread = require('../models/Thread');
 const authMiddleware = require('../middelewares/authMiddleware');
 
+const colorPalette = [
+  "#c5aae7",
+  "#7896f0",
+  "#94a6f2",
+  "#dc94db",
+  "#a8aff0",
+  "#dd9ee0",
+  "#7db4f4",
+  "#ccc4e9",
+  "#c4a5d2",
+];
+
+
+
 // Create a thread
 router.post('/createThread', authMiddleware, async (req, res) => {
   try {
+    const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
     const thread = new Thread({
       title: req.body.title,
       description: req.body.description,
       content: req.body.content,
       link: req.body.link,
-      createdBy: req.user.id
+      createdBy: req.user.id,
+      Colour: randomColor
     });
 
     const savedThread = await thread.save();

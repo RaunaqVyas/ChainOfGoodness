@@ -18,10 +18,9 @@ struct Chain: Identifiable {
 }
 
 var featuredChains = [
-    Chain(title: "Who we are", subtitle: "", text: "Learn more about our company and our goals ...", image: "Illustration 5", background: "Background 5", logo: "Logo 2"),
-    Chain(title: "UI Design for iOS 15", subtitle: "20 sections - 3 hours", text: "Design an iOS app for iOS 15 with custom layouts, animations and ...", image: "Illustration 3", background: "Background 4", logo: "Logo 4"),
-    Chain(title: "Flutter for designers", subtitle: "20 sections - 3 hours", text: "Flutter is a relatively new toolkit that makes it easy to build cross-platform apps that look gorgeous and is easy to use.", image: "Illustration 1", background: "Background 1", logo: "Logo 1"),
-    Chain(title: "React Hooks Advanced", subtitle: "20 sections - 3 hours", text: "Learn how to build a website with Typescript, Hooks, Contentful and Gatsby Cloud", image: "Illustration 2", background: "Background 2", logo: "Logo 3"),
+    Chain(title: "Who we are", subtitle: "", text: "Learn more about our company and our goals ...", image: "Illustration 5", background: "Background 5", logo: "person.2.fill"),
+    Chain(title: "Why we do this", subtitle: "Insight on the why", text: "Chain of goodness is a company that... ", image: "Illustration 3", background: "Background 4", logo: "person.2.fill"),
+    Chain(title: "This App", subtitle: "What this app is", text: "The goal of this app is to inspire..", image: "Illustration 1", background: "Background 1", logo: "person.2.fill")
 ]
 
 var chains = [
