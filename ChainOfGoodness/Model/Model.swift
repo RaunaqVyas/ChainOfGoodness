@@ -24,9 +24,6 @@ class Model: ObservableObject {
     
     private let userService = UserService()
    
-    
-    
-        
     }
     
 

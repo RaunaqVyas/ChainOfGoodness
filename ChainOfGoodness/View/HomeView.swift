@@ -11,6 +11,7 @@ struct HomeView: View {
     @State var hasScrolled = false
     @Namespace var namespace
     @State var show = false
+    @State var showThread = false
     @State var showStatusBar = true
     @State var selectedID = UUID()
     @State var showChain = false
@@ -80,14 +81,22 @@ struct HomeView: View {
                 
                 threadDetails
             }
+            
+            
+            if showThread {
+                        createThreadView(namespace: namespace, show: $showThread)
+                            .environmentObject(model)
+                    }
         } .onAppear {fetchUserThreads()}
         
         .statusBar(hidden: !showStatusBar)
         .onChange(of: show) { newValue in
             withAnimation(.closeCard) {
                 if newValue {
+                    fetchUserThreads()
                     showStatusBar = false
                 } else {
+                    fetchUserThreads()
                     showStatusBar = true
                 }
             }
@@ -206,12 +215,15 @@ struct HomeView: View {
             HStack {
                 Spacer()
                 Button {
+                    withAnimation {
+                        showThread.toggle()
+                    }
                     
                 } label:{
                     Image(systemName: "plus")
                         .font(.largeTitle)
                         .frame(width: 65,height: 65)
-                        .background(Color("blue"))
+                        .background(Color("AccentColor"))
                         .clipShape(Circle())
                         .foregroundColor(.white)
                 }

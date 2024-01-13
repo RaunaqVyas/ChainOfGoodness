@@ -54,6 +54,7 @@ final class SessionManager: ObservableObject {
         }
     }
 
+
     
     
     func showSignUp() {
@@ -80,8 +81,8 @@ final class SessionManager: ObservableObject {
             )
             // rest of your code...
             DispatchQueue.main.async {
-                self.authState = .confirmCode(username: username)
-            }
+                    self.authState = .confirmCode(username: username)
+                }
             
         } catch let error as AuthError {
             print("An error occurred while registering a user \(error)")
@@ -94,22 +95,22 @@ final class SessionManager: ObservableObject {
     
     func confirmSignUp(for username: String, with confirmationCode: String) async {
         do {
-            let confirmSignUpResult = try await Amplify.Auth.confirmSignUp(
-                for: username,
-                confirmationCode: confirmationCode
-                )
-                
-            if confirmSignUpResult.isSignUpComplete == true {
-                print("signed up")
-                self.authState = .login
+            let confirmSignUpResult = try await Amplify.Auth.confirmSignUp(for: username, confirmationCode: confirmationCode)
+            DispatchQueue.main.async {
+                if confirmSignUpResult.isSignUpComplete {
+                    print("Confirmation successful. Transitioning to login...")
+                    self.authState = .login
+                } else {
+                    print("Confirmation not complete.")
                 }
-            
+            }
         } catch let error as AuthError {
             print("An error occurred while confirming sign up \(error)")
         } catch {
             print("Unexpected error: \(error)")
         }
     }
+
     
     
     func signIn(username: String, password: String) async {

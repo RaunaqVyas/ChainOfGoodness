@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ImagePicker: UIViewControllerRepresentable {
     // Environment and binding variables
     @Environment(\.presentationMode) var presentationMode

@@ -80,6 +80,9 @@ struct AccountView: View {
             } label: {
                 Label("Settings", systemImage: "gear")
             }
+            .background(Color.white) // Set the background color to white (or any other color you prefer)
+            .cornerRadius(10) // Round the corners to make it look like a button or card
+            .padding(.vertical, 5) // Add vertical padding to create space above and below the item
             NavigationLink {
                 Button {
                     Task {
@@ -98,6 +101,9 @@ struct AccountView: View {
             } label: {
                 Label("About us", systemImage: "person.3.sequence.fill")
             }
+            .background(Color.white) // Set the background color to white (or any other color you prefer)
+            .cornerRadius(10) // Round the corners to make it look like a button or card
+            .padding(.vertical, 5) // Add vertical padding to create space above and below the item
             NavigationLink {
                 Text("Help")
             } label: {

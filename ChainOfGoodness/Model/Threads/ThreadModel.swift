@@ -17,6 +17,7 @@ struct Thread: Codable, Identifiable {
     let createdAt: String
     let updatedAt: String
     let likes: [String]
+    let Colour: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -28,12 +29,23 @@ struct Thread: Codable, Identifiable {
         case createdAt
         case updatedAt
         case likes
+        case Colour
     }
 }
 
-struct ThreadContent: Codable, Hashable  {
-    let type: String
-    let content: String
+struct ThreadContent: Identifiable, Codable, Hashable {
+    var id: String? = UUID().uuidString
+    var content: String
+    var type: String
+    var height: CGFloat = 0
+    var showImage: Bool = false
+    var showDeleteAlert: Bool = false
+
+    // Exclude the id from the decoding process
+    enum CodingKeys: String, CodingKey {
+        case content, type
+        // The id, height, showImage, and showDeleteAlert are excluded from the decoding process
+    }
 }
 
 struct ThreadCredentials: Codable {
@@ -42,3 +54,4 @@ struct ThreadCredentials: Codable {
     let content: [ThreadContent]
     let link: String
 }
+

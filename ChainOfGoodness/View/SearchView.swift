@@ -12,6 +12,7 @@ struct SearchView: View {
     @State var show = false
     @Namespace var namespace
     @State var selectedIndex = 0
+    @State var showDone = true
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -48,7 +49,6 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button { presentationMode.wrappedValue.dismiss() } label: { Text("Done").bold() })
             .sheet(isPresented: $show) {
                 ChainView(namespace: namespace,  chain: chains[selectedIndex] , show: $show)
             }

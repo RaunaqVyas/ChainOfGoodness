@@ -90,5 +90,35 @@ class ThreadService {
     }
 
     // Add other methods here.
+    
+    func createThread(thread: ThreadCredentials, completion: @escaping (Result<Thread, Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/createThread") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let accessToken = keychain.get("accessToken") ?? ""
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        request.httpBody = try? JSONEncoder().encode(thread)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data,
+               let response = response as? HTTPURLResponse,
+               response.statusCode == 201 {
+                do {
+                    let thread = try JSONDecoder().decode(Thread.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(thread))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+                completion(.failure(error ?? NSError(domain: "", code: -1, userInfo: nil)))
+            }
+        }.resume()
+    }
+
 }
 

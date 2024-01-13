@@ -30,7 +30,11 @@ const ThreadSchema = new mongoose.Schema({
   likes: [{
     type: String,
     ref: 'User'
-  }]
+  }],
+  Colour: {
+    type: String,
+    required: true
+  }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Thread', ThreadSchema)
