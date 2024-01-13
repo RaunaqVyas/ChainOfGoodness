@@ -100,7 +100,6 @@ final class SessionManager: ObservableObject {
                 if confirmSignUpResult.isSignUpComplete {
                     print("Confirmation successful. Transitioning to login...")
                     self.authState = .login
-                    // Optionally, you can directly sign in the user here if you have their credentials
                 } else {
                     print("Confirmation not complete.")
                 }

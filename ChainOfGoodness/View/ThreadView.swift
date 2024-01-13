@@ -114,7 +114,7 @@ struct ThreadView: View {
                 .matchedGeometryEffect(id: "title\(thread.id)", in: namespace)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(thread.createdBy.uppercased())
+            Text(thread.createdAt.uppercased())
                 .font(.footnote.weight(.semibold))
                 .matchedGeometryEffect(id: "subtitle\(thread.id)", in: namespace)
             Text(thread.description)
@@ -130,7 +130,7 @@ struct ThreadView: View {
                     .padding(8)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                     .strokeStyle(cornerRadius: 18)
-                Text("Created by Raunaq Vyas")
+                Text("Created by \(thread.createdBy).")
                     .font(.footnote)
             }
             .opacity(appear[1] ? 1 : 0)
