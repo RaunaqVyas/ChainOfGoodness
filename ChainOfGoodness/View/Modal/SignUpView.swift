@@ -103,7 +103,7 @@ struct SignUpView: View {
             Button {
                 Task {
                     do {
-                        await sessionManager.signUp(username: email, password: password, email: email, pictureUrl: "person.circle")
+                        await sessionManager.signUp(username: email,password: password, email: email, pictureUrl: "person.circle", preferredUsername: username)
                     }
                     sessionManager.selectedModal = .confirmation
                 }
@@ -111,6 +111,7 @@ struct SignUpView: View {
                 Text("Create an account")
                     .frame(maxWidth: .infinity)
             }
+
             .font(.headline)
             .blendMode(.overlay)
             .buttonStyle(.angular)

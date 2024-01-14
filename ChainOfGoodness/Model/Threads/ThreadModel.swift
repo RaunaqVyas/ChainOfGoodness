@@ -18,6 +18,7 @@ struct Thread: Codable, Identifiable {
     let updatedAt: String
     let likes: [String]
     let Colour: String
+    let displayName: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -30,6 +31,7 @@ struct Thread: Codable, Identifiable {
         case updatedAt
         case likes
         case Colour
+        case displayName
     }
 }
 

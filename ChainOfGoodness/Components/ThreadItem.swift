@@ -22,7 +22,7 @@ struct ThreadItem: View {
                     .font(.largeTitle.weight(.bold))
                     .matchedGeometryEffect(id: "title\(thread.id)", in: namespace)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Created By: \(thread.createdBy)")
+                Text("Created By: \(thread.displayName)")
                     .font(.footnote.weight(.semibold))
                     .matchedGeometryEffect(id: "createdBy\(thread.id)", in: namespace)
                 Text(thread.description)
@@ -110,7 +110,7 @@ struct ThreadItem_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        ThreadItem(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF"), show: .constant(true))
+        ThreadItem(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "SAMPLE NAME"), show: .constant(true))
     }
 }
 

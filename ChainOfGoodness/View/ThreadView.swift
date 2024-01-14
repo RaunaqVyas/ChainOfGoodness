@@ -130,7 +130,7 @@ struct ThreadView: View {
                     .padding(8)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                     .strokeStyle(cornerRadius: 18)
-                Text("Created by \(thread.createdBy).")
+                Text("Created by \(thread.displayName).")
                     .font(.footnote)
             }
             .opacity(appear[1] ? 1 : 0)
@@ -238,6 +238,6 @@ struct ThreadView_Previews: PreviewProvider {
     @Namespace static var namespace
 
     static var previews: some View {
-        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF"), show: .constant(true))
+        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "sample name"), show: .constant(true))
     }
 }

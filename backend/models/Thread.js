@@ -23,7 +23,7 @@ const ThreadSchema = new mongoose.Schema({
     type: String,
   },
   createdBy: {
-    type: String,
+    type:  String,
     ref: 'User',
     required: true
   },
@@ -32,6 +32,10 @@ const ThreadSchema = new mongoose.Schema({
     ref: 'User'
   }],
   Colour: {
+    type: String,
+    required: true
+  },
+  displayName: {
     type: String,
     required: true
   }

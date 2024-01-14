@@ -66,11 +66,11 @@ final class SessionManager: ObservableObject {
     }
     
 
-    func signUp(username: String, password: String, email: String, pictureUrl: String) async {
+    func signUp(username: String, password: String, email: String, pictureUrl: String, preferredUsername: String) async {
         let userAttributes = [
             AuthUserAttribute(.email, value: email),
-            AuthUserAttribute(.preferredUsername, value: username),
-            AuthUserAttribute(.picture, value: pictureUrl)
+            AuthUserAttribute(.picture, value: pictureUrl),
+            AuthUserAttribute(.preferredUsername, value: preferredUsername)
         ]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         do {
@@ -81,7 +81,7 @@ final class SessionManager: ObservableObject {
             )
             // rest of your code...
             DispatchQueue.main.async {
-                    self.authState = .confirmCode(username: username)
+                    self.authState = .confirmCode(username: email)
                 }
             
         } catch let error as AuthError {
