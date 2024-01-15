@@ -54,7 +54,7 @@ struct ThreadItem: View {
         //         .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
         // )
         .background(
-            Image(systemName: "person.circle")
+            Image(systemName: "")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(20)

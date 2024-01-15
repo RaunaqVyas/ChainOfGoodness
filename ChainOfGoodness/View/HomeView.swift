@@ -93,10 +93,8 @@ struct HomeView: View {
         .onChange(of: show) { newValue in
             withAnimation(.closeCard) {
                 if newValue {
-                    fetchUserThreads()
                     showStatusBar = false
                 } else {
-                    fetchUserThreads()
                     showStatusBar = true
                 }
             }

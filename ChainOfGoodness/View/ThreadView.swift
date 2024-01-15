@@ -47,7 +47,6 @@ struct ThreadView: View {
             fadeOut()
         }
     }
-    // ... (remaining similar to ChainView)
     
     var cover: some View {
         GeometryReader { proxy in
@@ -59,7 +58,7 @@ struct ThreadView: View {
             .frame(height: scrollY > 0 ? 500 + scrollY : 500)
             .foregroundStyle(.black)
             .background(
-                Image(systemName: "person.circle")
+                Image(systemName: "")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(20)
