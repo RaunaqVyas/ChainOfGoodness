@@ -124,6 +124,7 @@ final class SessionManager: ObservableObject {
                 await self.fetchTokens()
                 let user = try await Amplify.Auth.getCurrentUser()
                 let attributes = try await Amplify.Auth.fetchUserAttributes()
+                authState = .session(user: user)
             }
         } catch let error as AuthError {
             print("Sign in failed \(error)")

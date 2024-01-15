@@ -11,9 +11,9 @@ struct ThreadItem: View {
     var namespace: Namespace.ID
     var thread: Thread
     @Binding var show: Bool
+    @EnvironmentObject var threadService: ThreadService
     
 
-    
     var body: some View {
         VStack {
             Spacer()

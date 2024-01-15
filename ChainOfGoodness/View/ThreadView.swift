@@ -15,6 +15,7 @@ struct ThreadView: View {
     @State var viewState: CGSize = .zero
     @State var isDraggable = true
     @EnvironmentObject var model : Model
+    @EnvironmentObject var threadService: ThreadService
     
    
 

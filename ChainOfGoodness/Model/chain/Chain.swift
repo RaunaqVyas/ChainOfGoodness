@@ -19,7 +19,7 @@ struct Chain: Identifiable {
 
 var featuredChains = [
     Chain(title: "Who we are", subtitle: "", text: "Learn more about our company and our goals ...", image: "Illustration 5", background: "Background 5", logo: "person.2.fill"),
-    Chain(title: "Why we do this", subtitle: "Insight on the why", text: "Chain of goodness is a company that... ", image: "Illustration 3", background: "Background 4", logo: "person.2.fill"),
+    Chain(title: "Why we do this", subtitle: "Insight on the why", text: "Chain of goodness is a company that... ", image: "Image", background: "Background 4", logo: "person.2.fill"),
     Chain(title: "This App", subtitle: "What this app is", text: "The goal of this app is to inspire..", image: "Illustration 1", background: "Background 1", logo: "person.2.fill")
 ]
 

@@ -20,16 +20,15 @@ struct HomeView: View {
     @State var userThreads: [Thread] = []
     @EnvironmentObject var model : Model
     @EnvironmentObject var sessionManager : SessionManager
+    @EnvironmentObject var threadService : ThreadService
     
-    
-    
-    var threadService = ThreadService()
+
     
     var body: some View {
         ZStack {
             Color("Background").ignoresSafeArea()
             
-            ScrollView {
+            RefreshableScrollView {
                 scrollDetection
                 
                 featured
@@ -58,6 +57,8 @@ struct HomeView: View {
                 }
                 .padding(.horizontal,20)
                 
+            } onRefresh: {
+                print("refresh")
             }
             .coordinateSpace(name: "scroll")
             .safeAreaInset(edge: .top, content: {
@@ -87,7 +88,10 @@ struct HomeView: View {
                         createThreadView(namespace: namespace, show: $showThread)
                             .environmentObject(model)
                     }
-        } .onAppear {fetchUserThreads()}
+        } .onAppear {
+            fetchUserThreads()
+            
+        }
         
         .statusBar(hidden: !showStatusBar)
         .onChange(of: show) { newValue in
@@ -204,7 +208,6 @@ struct HomeView: View {
         }
         
     }
-    
     
     
     var plusButton: some View{
