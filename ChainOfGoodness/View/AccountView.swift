@@ -12,7 +12,7 @@ struct AccountView: View {
     @State var isPinned = false
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionManager : SessionManager
-    var threadService = ThreadService()
+    @EnvironmentObject var threadService: ThreadService
     
     
     var body: some View {

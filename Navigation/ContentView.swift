@@ -11,6 +11,7 @@ import Amplify
 struct ContentView: View {
     @AppStorage("selectedTab") var selectedTab: Tab = .home
     @EnvironmentObject var model: Model
+    var threadService = ThreadService()
     
     let user: AuthUser
     
@@ -20,6 +21,7 @@ struct ContentView: View {
             switch selectedTab {
             case .home:
                 HomeView()
+                    .environmentObject(threadService)
             case .explore:
                SearchView()
             case .notifications:

@@ -25,6 +25,7 @@ struct createThreadView: View {
     @State private var errorMessage: String = ""
     @State var appear = [false, false, false]
     @EnvironmentObject var model : Model
+    @EnvironmentObject var threadService : ThreadService
     @State var viewState : CGSize = .zero
     @State var isDraggable = true
     @State var threadTitle: String = ""
@@ -35,8 +36,6 @@ struct createThreadView: View {
     @FocusState var showKeyboard: Bool
     
     
-    var threadService = ThreadService()
-
     var body: some View {
         ZStack {
             ScrollView {

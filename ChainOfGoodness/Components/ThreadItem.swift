@@ -11,9 +11,9 @@ struct ThreadItem: View {
     var namespace: Namespace.ID
     var thread: Thread
     @Binding var show: Bool
+    @EnvironmentObject var threadService: ThreadService
     
 
-    
     var body: some View {
         VStack {
             Spacer()
@@ -54,7 +54,7 @@ struct ThreadItem: View {
         //         .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
         // )
         .background(
-            Image(systemName: "person.circle")
+            Image(systemName: "")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(20)

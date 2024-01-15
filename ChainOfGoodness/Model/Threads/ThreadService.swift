@@ -8,7 +8,7 @@
 import SwiftUI
 import KeychainSwift
 
-class ThreadService {
+class ThreadService: ObservableObject {
     let baseUrl = "http://localhost:3213/threads"
     let keychain = KeychainSwift()
     
