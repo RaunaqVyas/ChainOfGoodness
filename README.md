@@ -4,7 +4,7 @@
 
 **Chain of Goodness** is an innovative iOS app developed for a Non-Profit Organization. This app leverages cutting-edge technologies like Swift, SwiftUI, Express.js/Node.js, MongoDB, and various AWS services to deliver a seamless and impactful user experiences.
 
-Apart from its techincal details chain of goodness is an app created to further peoples interest in volunteering and international Development 
+Apart from its techincal details Chain Of Goodness is an app created to further peoples interest in volunteering and International Development 
 
 
 
