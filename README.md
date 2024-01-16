@@ -57,18 +57,27 @@ The views look like this please feel free to watch the video above the see the e
 
 
 ### UI and Animation (SwiftUI 3.0)
+
 My app showcases advanced UI components and custom animations created using SwiftUI 3.0, adhering to the MVVM design pattern. Below are some examples of my UI components and animations.
 
-<!-- Add screenshots or gif URLs here -->
-Custom opening animation
-![UI Screenshot](url-to-ui-screenshot)
-Swiping and sliding animation
-https://github.com/RaunaqVyas/chain_Of_Goodness/assets/44106026/2d0d28ff-4439-4f83-902d-94496175da2d
-Moving Views
+**Custom opening animation:**
 
+![openingClosing](https://github.com/RaunaqVyas/chain_Of_Goodness/assets/44106026/ed015544-b1e1-4bfa-8cc0-6a25373dc41c)
 
-### Custom complex views
-Further the app leverages custom UI views that I made using UIViewRepresentable. Take the custom text editor as an example
+_Opening and closing: Check out the custom opening and closing of views with matched geometry effect._
+
+**Swiping and sliding animation:**
+
+![swipingMoving](https://github.com/RaunaqVyas/chain_Of_Goodness/assets/44106026/3e5541bf-8992-4988-ba13-606cfef4710e)
+
+_Sliding: See sliding of views with paralax and blur._
+
+**Moving Views:**
+
+![MovingBlob](https://github.com/RaunaqVyas/chain_Of_Goodness/assets/44106026/431b68ab-708e-4d07-86b5-efcfe34c638c)
+
+_Blob view: Check out the moving blob._
+
 
  **Custom Text Editor**:
  
@@ -87,10 +96,6 @@ AWS S3 is utilized for secure and scalable storage. By using S3 I no longer need
 **Example of image being uploaded and retrieved:**
 
 
-### Server (AWS Elastic Beanstalk)
-AWS Elastic Beanstalk offers on-demand server capacity, ensuring the app remains responsive, even during peak times.
-
-
 ## Usage
 Here's how users can interact with the app:
 1. **Creating posts**: [Explain how]
@@ -98,7 +103,6 @@ Here's how users can interact with the app:
 
 ## Roadmap
 We're constantly working to enhance the app. Some of our upcoming features include:
-- **Feature 1**: [Description]
-- **Feature 2**: [Description]
-- **Feature 3**: [Description]
+- **Feature 1**: Messaging System
+- **Feature 2**: Enhanced Notification system
 
