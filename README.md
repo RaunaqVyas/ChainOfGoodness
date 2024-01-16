@@ -54,8 +54,6 @@ The views look like this please feel free to watch the video above the see the e
 
 
 
-
-
 ### UI and Animation (SwiftUI 3.0)
 
 My app showcases advanced UI components and custom animations created using SwiftUI 3.0, adhering to the MVVM design pattern. Below are some examples of my UI components and animations.
@@ -81,7 +79,14 @@ _Blob view: Check out the moving blob._
 _Credit: This animation design and UI was inspired by [Figma]([https://www.figma.com](https://www.figma.com/community/file/1010544184877672084/design-code-design-system)) ._
 
 
- **Custom Text Editor**:
+ ### Custom components 
+
+ Along with building full ui components I also utlized UIViewRepresentable to build non native features. Like this text editor 
+
+**Text Editor:**
+
+![textEditNew](https://github.com/RaunaqVyas/chain_Of_Goodness/assets/44106026/aaaa772d-152c-4a70-a71b-1154b3c1c21d)
+
  
  
 
