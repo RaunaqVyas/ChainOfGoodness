@@ -13,6 +13,7 @@ import SwiftUI
 import AWSCognitoIdentityProvider
 import AWSPluginsCore
 import KeychainSwift
+import AWSS3StoragePlugin
 
 enum AuthState {
     case signUp
@@ -200,7 +201,44 @@ final class SessionManager: ObservableObject {
             print("Failed to fetch user attributes - \(error)")
         }
     }
-    //
+    
+    func uploadImageToS3Async(image: UIImage) async throws -> String {
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
+            throw YourError.failedToGetImageData
+        }
 
+        let key = "yourUniqueKeyPrefix/\(UUID().uuidString).jpg"
+
+        // Upload data
+        let uploadTask = Amplify.Storage.uploadData(key: key, data: imageData)
+
+        // Optionally handle progress
+        for await progress in await uploadTask.progress {
+            print("Progress: \(progress)")
+        }
+
+        // Complete upload and get key
+        _ = try await uploadTask.value
+        return key
+    }
+    
+    func fetchImageFromS3Async(key: String) async throws -> UIImage {
+        let downloadTask = Amplify.Storage.downloadData(key: key)
+
+        let imageData = try await downloadTask.value
+
+        guard let image = UIImage(data: imageData) else {
+            throw YourError.failedToConvertDataToImage
+        }
+
+        return image
+    }
 
 }
+
+enum YourError: Error {
+    case failedToGetImageData
+    case failedToConvertDataToImage
+    case unknownError
+}
+

@@ -50,11 +50,11 @@ struct ProfileView: View {
                             // Title View...
                             VStack(spacing: 5){
                                 
-                                Text("Raunaq Vyas")
+                                Text("raunaqVyas")
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                 
-                                Text("150 Chains")
+                                Text("0 Chains")
                                     .foregroundColor(.white)
                             }
                             // to slide from bottom added extra 60..
@@ -98,7 +98,7 @@ struct ProfileView: View {
                     
                     VStack(alignment: .center, spacing: 8, content: {
                         
-                        Text("Raunaq Vyas")
+                        Text("raunaqVyas")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
@@ -108,14 +108,14 @@ struct ProfileView: View {
                     
                         HStack(spacing: 5){
                             
-                            Text("13")
+                            Text("0")
                                 .foregroundColor(.primary)
                                 .fontWeight(.semibold)
                             
                             Text("Followers")
                                 .foregroundColor(.gray)
                             
-                            Text("680")
+                            Text("0")
                                 .foregroundColor(.primary)
                                 .fontWeight(.semibold)
                                 .padding(.leading,10)

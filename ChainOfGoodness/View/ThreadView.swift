@@ -15,17 +15,15 @@ struct ThreadView: View {
     @State var viewState: CGSize = .zero
     @State var isDraggable = true
     @EnvironmentObject var model : Model
-    @EnvironmentObject var threadService: ThreadService
+    @EnvironmentObject var sessionManager: SessionManager
     
-   
-
     var body: some View {
         ZStack {
             
             ScrollView {
                 cover
                 content
-            
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .offset(y: 120)
                     .padding(.bottom, 200)
                     .opacity(appear[2] ? 1 : 0)
@@ -59,14 +57,12 @@ struct ThreadView: View {
             .frame(height: scrollY > 0 ? 500 + scrollY : 500)
             .foregroundStyle(.black)
             .background(
-                Image(systemName: "")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(20)
-                    .frame(maxWidth: 500)
-                    .matchedGeometryEffect(id: "image\(thread.id)", in: namespace)
-                    .offset(y: scrollY > 0 ? scrollY * -0.8 : 0)
-            )
+                        AsyncImageView(imageKey: thread.image ?? "", sessionManager: sessionManager)
+                            .matchedGeometryEffect(id: "image\(thread.id)", in: namespace)
+                            .padding(20)
+                            .frame(maxWidth: 800, maxHeight: 300)
+                            .offset(y: scrollY > 0 ? scrollY * -0.8 : 0)
+                    )
             .background(
                 Rectangle()
                     .fill(Color(hex:thread.Colour))
@@ -238,6 +234,6 @@ struct ThreadView_Previews: PreviewProvider {
     @Namespace static var namespace
 
     static var previews: some View {
-        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "sample name"), show: .constant(true))
+        ThreadView(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "sample name", image: ""), show: .constant(true))
     }
 }

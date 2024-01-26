@@ -20,7 +20,6 @@ router.post('/createUser', async (req, res) => {
   })
 
 //Delete
-
 router.delete('/deleteAll', async (req, res) => {
     try {
         await User.deleteMany({ cognitoId: null });

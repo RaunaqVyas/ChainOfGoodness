@@ -9,6 +9,7 @@ import SwiftUI
 import Amplify
 import Combine
 import AWSCognitoAuthPlugin
+import AWSS3StoragePlugin
 
 
 
@@ -54,9 +55,10 @@ struct DesignCodeiOS15App: App {
     func configureAmplify(){
         do {
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.add(plugin: AWSS3StoragePlugin())
             
             try Amplify.configure()
-            print("Configured Amplify Succefully")
+            print("Amplify configured with Auth and Storage plugins")
             
         } catch{
             print("Amplify was unable to be configured")

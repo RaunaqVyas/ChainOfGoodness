@@ -29,7 +29,7 @@ const ThreadSchema = new mongoose.Schema({
   },
   likes: [{
     type: String,
-    ref: 'User'
+    ref: 'User' 
   }],
   Colour: {
     type: String,
@@ -38,6 +38,10 @@ const ThreadSchema = new mongoose.Schema({
   displayName: {
     type: String,
     required: true
+  },
+  image:{
+    type: String,
+    required: false
   }
 }, {timestamps: true})
 
