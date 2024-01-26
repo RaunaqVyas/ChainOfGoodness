@@ -17,12 +17,11 @@ struct HomeView: View {
     @State var showChain = false
     @State var selectedIndex = 0
     @State var selectedThreadID = ""
-    @State var userThreads: [Thread] = []
     @EnvironmentObject var model : Model
     @EnvironmentObject var sessionManager : SessionManager
-    @EnvironmentObject var threadService : ThreadService
     
-
+    @StateObject var viewModel = ThreadViewModel()
+    
     
     var body: some View {
         ZStack {
@@ -51,7 +50,7 @@ struct HomeView: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color("Shadow"),radius: 20, x:20,y:10)
                                 .opacity(0.3)
-                            .padding(.horizontal,30)
+                                .padding(.horizontal,30)
                         }
                     }
                 }
@@ -69,7 +68,7 @@ struct HomeView: View {
             )
             .overlay(
                 Group {
-                    if hasScrolled {
+                    if hasScrolled || viewModel.userThreads.count == 0 {
                         withAnimation(.easeInOut){
                             plusButton.transition(.scale)
                         }
@@ -85,9 +84,9 @@ struct HomeView: View {
             
             
             if showThread {
-                        createThreadView(namespace: namespace, show: $showThread)
-                            .environmentObject(model)
-                    }
+                createThreadView(namespace: namespace, show: $showThread, viewModel: viewModel)
+                    .environmentObject(model)
+            }
         } .onAppear {
             fetchUserThreads()
             
@@ -104,7 +103,7 @@ struct HomeView: View {
             }
         }
     }
-        
+    
     var scrollDetection: some View {
         GeometryReader { proxy in
             Color.clear.preference(key: ScrollPreferenceKey.self, value: proxy.frame(in: .named("scroll")).minY)
@@ -147,7 +146,7 @@ struct HomeView: View {
                             selectedIndex = index
                         }
                     
-//                    Text("\(proxy.frame(in: .global).minX)")
+                    //                    Text("\(proxy.frame(in: .global).minX)")
                 }
             }
         }
@@ -170,23 +169,23 @@ struct HomeView: View {
                         model.showDetail.toggle()
                         showStatusBar = false
                         selectedID = chain.id
-                        }
+                    }
                 }
-            }
         }
+    }
     var details: some View {
         ForEach(chains) { chain in
             if chain.id == selectedID {
                 ChainView(namespace: namespace, chain: chain, show: $show)
                     .zIndex(1)
-                .transition(.asymmetric(insertion: .opacity.animation(.easeInOut(duration: 0.1)), removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))))
+                    .transition(.asymmetric(insertion: .opacity.animation(.easeInOut(duration: 0.1)), removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))))
             }
         }
         
     }
     
     var threads: some View{
-        ForEach(userThreads) { thread in
+        ForEach(viewModel.userThreads) { thread in
             ThreadItem(namespace: namespace, thread: thread, show: $show)
                 .onTapGesture {
                     withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
@@ -194,16 +193,16 @@ struct HomeView: View {
                         model.showDetail.toggle()
                         showStatusBar = false
                         selectedThreadID = thread.id
-                        }
+                    }
                 }
-            }
         }
+    }
     var threadDetails: some View {
-        ForEach(userThreads) { thread in
-                if thread.id == selectedThreadID {
-                    ThreadView(namespace: namespace, thread: thread, show: $show)
+        ForEach(viewModel.userThreads) { thread in
+            if thread.id == selectedThreadID {
+                ThreadView(namespace: namespace, thread: thread, show: $show)
                     .zIndex(1)
-                .transition(.asymmetric(insertion: .opacity.animation(.easeInOut(duration: 0.1)), removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))))
+                    .transition(.asymmetric(insertion: .opacity.animation(.easeInOut(duration: 0.1)), removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))))
             }
         }
         
@@ -236,14 +235,7 @@ struct HomeView: View {
     
     func fetchUserThreads() {
         if let userId = sessionManager.currentUser?.userId {
-            threadService.getUserThreads(userId: userId) { result in
-                switch result {
-                case .success(let threads):
-                    userThreads = threads
-                case .failure(let error):
-                    print(error)
-                }
-            }
+            viewModel.fetchUserThreads(userId: userId)
         }
     }
 }

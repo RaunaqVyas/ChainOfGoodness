@@ -12,7 +12,6 @@ struct AccountView: View {
     @State var isPinned = false
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionManager : SessionManager
-    @EnvironmentObject var threadService: ThreadService
     
     
     var body: some View {
@@ -47,7 +46,7 @@ struct AccountView: View {
                         .offset(x:250,y:50)
                         .scaleEffect(0.5)
                 }
-            Text("Raunaq Vyas")
+            Text("raunaq")
                 .font(.title.weight(.semibold))
             HStack {
                 Image(systemName: "location")

@@ -11,7 +11,8 @@ struct TextView: UIViewRepresentable {
 
     @Binding var text: String
     @Binding var height: CGFloat
-    var fontSize: CGFloat
+    var fontSize: Double
+    var fontWeight: UIFont.Weight
     
     func makeCoordinator() -> Coordinator {
         return TextView.Coordinator(parent: self)
@@ -21,8 +22,8 @@ struct TextView: UIViewRepresentable {
         
         let view = UITextView()
         view.backgroundColor = .clear
-        view.font = .systemFont(ofSize: fontSize)
         view.text = text
+        view.font = .systemFont(ofSize: fontSize, weight: fontWeight)
         view.layoutManager.delegate = context.coordinator
         view.delegate = context.coordinator
         

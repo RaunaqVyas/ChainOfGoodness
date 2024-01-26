@@ -8,11 +8,12 @@
 import SwiftUI
 import KeychainSwift
 
-class ThreadService: ObservableObject {
+class ThreadService {
     let baseUrl = "http://localhost:3213/threads"
     let keychain = KeychainSwift()
     
-
+    static let shared = ThreadService()
+    
     func deleteThread(threadId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/deleteThread/\(threadId)") else { return }
         var request = URLRequest(url: url)
@@ -59,6 +60,33 @@ class ThreadService: ObservableObject {
             }
         }.resume()
     }
+    
+    func fetchAllUserThreads(completion: @escaping (Result<[Thread], Error>) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/allThreads") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let accessToken = keychain.get("accessToken") ?? ""
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data,
+               let response = response as? HTTPURLResponse,
+               response.statusCode == 200 {
+                do {
+                    let threads = try JSONDecoder().decode([Thread].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(threads))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+                completion(.failure(error ?? NSError(domain: "", code: -1, userInfo: nil)))
+            }
+        }.resume()
+    }
+
 
     func editThread(threadId: String, updatedThread: ThreadCredentials, completion: @escaping (Result<Thread, Error>) -> Void) {
         guard let url = URL(string: "\(baseUrl)/editThread/\(threadId)") else { return }

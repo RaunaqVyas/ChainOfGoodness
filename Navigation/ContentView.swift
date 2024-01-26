@@ -21,7 +21,6 @@ struct ContentView: View {
             switch selectedTab {
             case .home:
                 HomeView()
-                    .environmentObject(threadService)
             case .explore:
                SearchView()
             case .notifications:

@@ -11,7 +11,9 @@ struct ThreadItem: View {
     var namespace: Namespace.ID
     var thread: Thread
     @Binding var show: Bool
-    @EnvironmentObject var threadService: ThreadService
+    @State private var fetchedImage: UIImage?
+    @State private var isImageLoading: Bool = false
+    @EnvironmentObject var sessionManager: SessionManager
     
 
     var body: some View {
@@ -39,27 +41,11 @@ struct ThreadItem: View {
             )
         }
         .foregroundStyle(.white)
-        // Fix s3 uplaod
-        // .background(
-        //     Image(thread.image)
-        //         .resizable()
-        //         .aspectRatio(contentMode: .fit)
-        //         .padding(20)
-        //         .matchedGeometryEffect(id: "image\(thread.id)", in: namespace)
-        // )
-        // .background(
-        //     Image(thread.background)
-        //         .resizable()
-        //         .aspectRatio(contentMode: .fill)
-        //         .matchedGeometryEffect(id: "background\(thread.id)", in: namespace)
-        // )
         .background(
-            Image(systemName: "")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(20)
-                .matchedGeometryEffect(id: "image\(thread.id)", in: namespace)
-        )
+                    AsyncImageView(imageKey: thread.image ?? "", sessionManager: sessionManager)
+                        .matchedGeometryEffect(id: "image\(thread.id)", in: namespace)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                )
         .background(
             Rectangle()
                 .fill(Color(hex:thread.Colour))
@@ -89,20 +75,17 @@ struct ThreadItem: View {
                 case "paragraph":
                     Text(content.content)
                 case "image":
-                    // Assuming the content is a URL string to an image
+                    
                     if let url = URL(string: content.content) {
                         AsyncImage(url: url)
                     }
                 default:
-                    // Default case
                     Text(content.content)
                 }
             }
         }
         .padding(20)
     }
-    
-    
 }
 
 
@@ -110,7 +93,7 @@ struct ThreadItem_Previews: PreviewProvider {
     @Namespace static var namespace
     
     static var previews: some View {
-        ThreadItem(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "SAMPLE NAME"), show: .constant(true))
+        ThreadItem(namespace: namespace, thread: Thread(id: "1", title: "Sample", description: "Sample Description", content: [], link: "Sample Link", createdBy: "Sample Creator", createdAt: "2023-06-06T19:57:40.707Z", updatedAt: "2023-06-06T23:40:25.625Z", likes: [],Colour:"#FFFFFF", displayName: "SAMPLE NAME", image: ""), show: .constant(true))
     }
 }
 

@@ -19,6 +19,7 @@ struct Thread: Codable, Identifiable {
     let likes: [String]
     let Colour: String
     let displayName: String
+    let image: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -32,6 +33,7 @@ struct Thread: Codable, Identifiable {
         case likes
         case Colour
         case displayName
+        case image
     }
 }
 
@@ -55,5 +57,6 @@ struct ThreadCredentials: Codable {
     let description: String
     let content: [ThreadContent]
     let link: String
+    let image: String?
 }
 

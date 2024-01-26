@@ -34,7 +34,8 @@ router.post('/createThread', authMiddleware, async (req, res) => {
       link: req.body.link,
       createdBy: user._id, // Use the _id of the user document
       Colour: randomColor,
-      displayName: user.username
+      displayName: user.username,
+      image: req.body.image
     });
 
     const savedThread = await thread.save();

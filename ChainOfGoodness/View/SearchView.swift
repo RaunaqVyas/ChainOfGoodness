@@ -14,6 +14,9 @@ struct SearchView: View {
     @State var selectedIndex = 0
     @State var showDone = true
     @Environment(\.presentationMode) var presentationMode
+    @State private var selectedThread: Thread?
+    @State private var showThreadView = false
+    @StateObject var viewModel = ThreadViewModel()
     
     var body: some View {
         NavigationView {
@@ -47,48 +50,29 @@ struct SearchView: View {
                     }
                 }
             }
+            .task {
+                viewModel.fetchAllThreads()
+            }
             .navigationTitle("Search")
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $show) {
-                ChainView(namespace: namespace,  chain: chains[selectedIndex] , show: $show)
+            .sheet(isPresented: $showThreadView) {
+                if let selectedThread = selectedThread {
+                    ThreadView(namespace: namespace, thread: selectedThread, show: $showThreadView)
+                }
             }
         }
     }
     
     var content: some View {
-        ForEach(Array(chains.enumerated()), id : \.offset) { index , item in
-            if item.title.contains(text) || text == "" {
-                if index != 0 {
-                    Divider()
-                }
-                Button {
-                    show = true
-                    selectedIndex = index
-                } label: {
-                    HStack(alignment: .top, spacing: 12) {
-                        Image(item.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 44, height: 44)
-                            .background(Color("Background"))
-                            .mask(Circle())
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(item.title).bold()
-                                .foregroundColor(.primary)
-                            Text(item.text)
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .multilineTextAlignment(.leading)
-                        }
-                    }
-                    .padding(.vertical, 4)
-                    .listRowSeparator(.hidden)
-            }
-            }
-            
-        }
-    }
+           ForEach(viewModel.allUserThreads) { thread in
+               if thread.title.contains(text) || text.isEmpty {
+                   ThreadListItem(thread: thread) {
+                       self.selectedThread = thread
+                       self.showThreadView = true
+                   }
+               }
+           }
+       }
 }
 
 struct SearchView_Previews: PreviewProvider {
